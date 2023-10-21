@@ -1,12 +1,13 @@
 import tkinter as tk
 import subprocess
 
+
 def save_mapping():
     changes = []
     for s in selected:
         changes.append(s.get())
 
-    f = open("GestureBinds.txt", 'w')
+    f = open("GestureBinds.txt", "w")
     f.write("\n".join(changes))
     f.close()
 
@@ -18,7 +19,7 @@ def load_gesture_bindings():
 
     try:
         f = open("GestureBinds.txt", "r")
-        for i in range(6): 
+        for i in range(6):
             gesture_to_movement.append((int)(f.readline()))
 
     except FileNotFoundError:
@@ -27,7 +28,9 @@ def load_gesture_bindings():
 
 def start_control():
     try:
-        subprocess.run(['python3', "/Users/tt/Desktop/RoboticArm/Gesture.py"], check=True)
+        subprocess.run(
+            ["python3", "Gesture.py"], check=True
+        )
 
     except Exception as e:
         print("Error:", str(e))
@@ -35,7 +38,7 @@ def start_control():
 
 def open_gesture_binding_window():
     binds = gesture_to_movement.copy()
-    #print(binds)
+    # print(binds)
 
     binding_window = tk.Toplevel(root)
 
@@ -67,7 +70,7 @@ selected = []
 gesture_to_movement = []
 
 load_gesture_bindings()
-#print(gesture_to_movement)
+# print(gesture_to_movement)
 
 root = tk.Tk()
 
@@ -91,10 +94,11 @@ entrance_label.pack()
 
 
 frame_a = tk.Frame()
-label_a = tk.Label(master=frame_a, text="I am doing this project to create a gesture-controlled robotic arm for...\n")
+label_a = tk.Label(
+    master=frame_a,
+    text="I am doing this project to create a gesture-controlled robotic arm for...\n",
+)
 label_a.pack()
-
-
 
 
 binding_frame = tk.Frame(root, padx=20, pady=20)
@@ -109,7 +113,14 @@ binding_label.pack()
 
 gestures = [i for i in range(1, 11)]
 
-movements = ["X-Clockwise", "X-Anticlockwise", "Y-Clockwise","Y-Anticlockwise", "Z-Clockwise", "Z-Anticlockwise"]
+movements = [
+    "X-Clockwise",
+    "X-Anticlockwise",
+    "Y-Clockwise",
+    "Y-Anticlockwise",
+    "Z-Clockwise",
+    "Z-Anticlockwise",
+]
 
 
 edit_button = tk.Button(
@@ -149,4 +160,3 @@ start_button.pack()
 
 
 root.mainloop()
-
