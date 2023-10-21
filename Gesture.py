@@ -11,8 +11,14 @@ def select_port():
 
     for i, port in enumerate(ports):
         print(f"{i + 1}: {port.device}")
-
-    port_index = int(input("Select a port: ")) - 1
+    
+    # Input validation (range check)
+    while True: 
+        port_index = int(input("Select a port: ")) - 1
+        if port_index <= 10 or port_index >= 0:
+            break
+        print("Invalid port selection, enter again: ")
+    
 
     return ports[port_index].device
 
@@ -125,7 +131,6 @@ if __name__ == "__main__":
     f.close()
 
     while True:
-        # Rendering the gesture on screen
         success, img = cap.read()
 
         if not success:
@@ -172,7 +177,6 @@ if __name__ == "__main__":
 
             str_guester = get_str_guester(up_fingers, list_lms)
 
-            # Passing the gesture servo
             if str_guester == "1" or str_guester == "2" or str_guester == "3" or str_guester == "4" or str_guester == "5" or str_guester == "6" or str_guester == "7" or str_guester == "8" or str_guester == "9" or str_guester == "10":
                 ser.write(gestureBinds[str_guester])
 
