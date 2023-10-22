@@ -18,8 +18,6 @@ def select_port():
         if port_index <= 10 or port_index >= 0:
             break
         print("Invalid port selection, enter again: ")
-    
-
     return ports[port_index].device
 
 # Function to calculate the angle between two vectors
@@ -39,17 +37,9 @@ def get_str_guester(up_fingers, list_lms):
             str_guester = "9"
         else:
             str_guester = "1"
-    
-    elif len(up_fingers) == 1 and up_fingers[0] == 4:
-        str_guester = "Good"
-        time.sleep(0.1)
-
-    elif len(up_fingers) == 1 and up_fingers[0] == 20:
-        str_guester = "Bad"
-        time.sleep(0.1)
 
     elif len(up_fingers) == 1 and up_fingers[0] == 12:
-        str_guester = "FuCk"
+        str_guester = "Why are you showing that?"
 
     elif len(up_fingers) == 2 and up_fingers[0] == 8 and up_fingers[1] == 12:
         str_guester = "2"
@@ -64,19 +54,7 @@ def get_str_guester(up_fingers, list_lms):
         str_guester = "3"
 
     elif len(up_fingers) == 3 and up_fingers[0] == 4 and up_fingers[1] == 8 and up_fingers[2] == 12:
-        dis_8_12 = list_lms[8, :] - list_lms[12, :]
-        dis_8_12 = np.sqrt(np.dot(dis_8_12, dis_8_12))
-
-        dis_4_12 = list_lms[4, :] - list_lms[12, :]
-        dis_4_12 = np.sqrt(np.dot(dis_4_12, dis_4_12))
-
-        if dis_4_12 / (dis_8_12 + 1) <= 5:
-            str_guester = "7"
-        elif dis_4_12 / (dis_8_12 + 1) > 5:
-            str_guester = "Gun"
-
-    elif len(up_fingers) == 3 and up_fingers[0] == 4 and up_fingers[1] == 8 and up_fingers[2] == 20:
-        str_guester = "ROCK"
+        str_guester = "7"
 
     elif len(up_fingers) == 4 and up_fingers[0] == 8 and up_fingers[1] == 12 and up_fingers[2] == 16 and up_fingers[3] == 20:
         str_guester = "4"
@@ -178,7 +156,8 @@ if __name__ == "__main__":
             str_guester = get_str_guester(up_fingers, list_lms)
 
             if str_guester == "1" or str_guester == "2" or str_guester == "3" or str_guester == "4" or str_guester == "5" or str_guester == "6" or str_guester == "7" or str_guester == "8" or str_guester == "9" or str_guester == "10":
-                ser.write(gestureBinds[str_guester])
+                #ser.write(gestureBinds[str_guester])
+                print(gestureBinds[int(str_guester)])
 
             cv2.putText(
                 img,
